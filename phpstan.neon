@@ -1,0 +1,27 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+        - config/
+        - database/
+        - routes/
+        - tests/
+
+    # Level 8 is the highest level
+    level: 8
+
+    # Check model properties
+    checkModelProperties: true
+    
+    # Check Octane compatibility
+    checkOctaneCompatibility: true
+
+    ignoreErrors:
+        -
+            message: '#Undefined variable: \$this#'
+            paths:
+                - tests/*
