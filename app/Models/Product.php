@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\ProductStatus;
+use App\Observers\ProductObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +22,7 @@ use Spatie\Sluggable\SlugOptions;
  * Represents a product available for sale. Products belong to categories,
  * have stock tracking, and support media attachments for images.
  */
+#[ObservedBy(ProductObserver::class)]
 class Product extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ProductFactory> */
@@ -36,6 +39,7 @@ class Product extends Model implements HasMedia
         'price',
         'stock_quantity',
         'status',
+        'low_stock_notified_at',
     ];
 
     /**
@@ -49,6 +53,7 @@ class Product extends Model implements HasMedia
             'price' => 'decimal:2',
             'stock_quantity' => 'integer',
             'status' => ProductStatus::class,
+            'low_stock_notified_at' => 'datetime',
         ];
     }
 
