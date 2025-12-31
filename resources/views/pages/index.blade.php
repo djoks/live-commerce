@@ -32,9 +32,9 @@ name('home');
                 </p>
 
                 <div class="pt-8">
-                    <a href="{{ route('shop.index') }}" class="inline-block bg-[#B88E2F] hover:bg-[#a17a26] text-white text-base font-bold uppercase py-[25px] px-[72px] transition-colors duration-300 cursor-pointer">
+                    <x-primary-button href="{{ route('shop.index') }}" class="py-[25px] px-[72px]">
                         Buy Now
-                    </a>
+                    </x-primary-button>
                 </div>
             </div>
         </div>

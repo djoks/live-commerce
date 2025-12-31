@@ -36,7 +36,7 @@ new class extends Component {
     </div>
 
     <div class="text-center">
-        <a href="{{ route('shop.index') }}" class="inline-block border border-[#B88E2F] text-[#B88E2F] hover:bg-[#B88E2F] hover:text-white font-semibold py-3 px-[74px] transition-colors duration-300">
+        <a href="{{ route('shop.index') }}" class="inline-block border border-[#B88E2F] text-[#B88E2F] hover:bg-[#B88E2F] hover:text-white font-semibold py-3 px-[74px] transition-colors duration-300 rounded-[10px]">
             Show More
         </a>
     </div>

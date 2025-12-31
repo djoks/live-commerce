@@ -44,12 +44,9 @@
                         placeholder="Enter Your Email Address" 
                         class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-3 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white placeholder-[#9F9F9F] text-sm flex-1 min-w-[200px]"
                     >
-                    <button 
-                        type="submit" 
-                        class="bg-[#B88E2F] hover:bg-[#a17a26] text-white text-sm font-bold uppercase py-3 px-8 transition-colors duration-300 cursor-pointer"
-                    >
+                    <x-primary-button class="text-sm py-3 px-8">
                         Subscribe
-                    </button>
+                    </x-primary-button>
                 </form>
             </div>
         </div>

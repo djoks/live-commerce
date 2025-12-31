@@ -141,8 +141,8 @@ new class extends Component {
     </div>
 
     <div class="flex justify-end">
-        <button wire:click="placeOrder" class="bg-[#B88E2F] hover:bg-[#a17a26] text-white text-base font-bold uppercase py-4 px-12 transition-colors duration-300 cursor-pointer">
+        <x-primary-button wire:click="placeOrder">
             Place order
-        </button>
+        </x-primary-button>
     </div>
 </div>

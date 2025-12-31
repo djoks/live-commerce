@@ -109,7 +109,7 @@ new class extends Component {
                         <div class="flex items-start justify-between px-4 py-6 sm:px-6 border-b border-zinc-200 dark:border-zinc-700">
                             <div>
                                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white" id="slide-over-title">Cart</h2>
-                                @if($cart && $cart->expires_at)
+                                @if($cart && $cart->items->isNotEmpty() && $cart->expires_at)
                                     <x-cart.expiration-timer :expiresAt="$cart->expires_at->toIso8601String()" />
                                 @endif
                             </div>
@@ -191,12 +191,9 @@ new class extends Component {
                                     >
                                         Clear
                                     </button>
-                                    <a 
-                                        href="{{ route('checkout') }}" 
-                                        class="flex-1 flex items-center justify-center rounded-lg bg-[#B88E2F] border border-[#B88E2F] px-6 py-3 text-base font-medium text-white hover:bg-[#a17b28] hover:border-[#a17b28] transition-colors"
-                                    >
+                                    <x-primary-button href="{{ route('checkout') }}" class="flex-1 py-3 px-6">
                                         Checkout
-                                    </a>
+                                    </x-primary-button>
                                 </div>
                             </div>
                         @endif
