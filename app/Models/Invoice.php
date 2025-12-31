@@ -37,6 +37,7 @@ class Invoice extends Model
         'tax',
         'total_amount',
         'status',
+        'order_no',
     ];
 
     /**

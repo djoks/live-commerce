@@ -41,7 +41,7 @@ class CheckoutService
      *
      * @throws InvalidArgumentException If the cart is empty or stock is insufficient.
      */
-    public function checkout(User $user): Invoice
+    public function checkout(User $user, array $billingData): Invoice
     {
         $cart = $this->cartService->getOrCreateActiveCart($user);
         $cart->loadMissing('items.product');
@@ -50,9 +50,7 @@ class CheckoutService
             throw new InvalidArgumentException('Cart is empty');
         }
 
-        return DB::transaction(function () use ($user, $cart) {
-            $customer = $this->customerRepository->findByUserId($user->id);
-
+        return DB::transaction(function () use ($user, $cart, $billingData) {
             // Validate stock and lock products
             foreach ($cart->items as $item) {
 
@@ -76,21 +74,25 @@ class CheckoutService
             $tax = round($subTotal * 0.1, 2); // 10% tax
             $totalAmount = $subTotal + $tax;
 
-            // Prepare invoice data
+            // Prepare invoice data using provided billing details
             $invoiceData = [
                 'user_id' => $user->id,
-                'customer_name' => $user->name,
-                'customer_email' => $user->email,
-                'delivery_address' => $customer?->delivery_address,
-                'city' => $customer?->city,
-                'postal_code' => $customer?->postal_code,
-                'country' => $customer?->country,
-                'phone' => $customer?->phone,
+                'customer_name' => $billingData['name'] ?? $user->name,
+                'customer_email' => $billingData['email'] ?? $user->email,
+                'delivery_address' => $billingData['streetAddress'] ?? null,
+                'city' => $billingData['city'] ?? null,
+                'postal_code' => $billingData['zipCode'] ?? null,
+                'country' => $billingData['countryRegion'] ?? null,
+                'province' => $billingData['province'] ?? null,
+                'phone' => $billingData['phone'] ?? null,
+                'additional_info' => $billingData['additionalInfo'] ?? null,
                 'sub_total' => $subTotal,
                 'discount' => null,
                 'tax' => $tax,
                 'total_amount' => $totalAmount,
                 'status' => InvoiceStatus::Pending,
+                'payment_method' => $billingData['paymentMethod'] ?? 'bank',
+                'order_no' => $this->generateOrderNumber(),
             ];
 
             // Prepare invoice items
@@ -134,5 +136,27 @@ class CheckoutService
             // Dispatch low stock notification job (to be implemented)
             // SendLowStockAlertJob::dispatch($product);
         }
+    }
+    /**
+     * Generate a unique order number.
+     * Use simple static implementation or move to a helper/trait if needed.
+     *
+     * @return string
+     */
+    private function generateOrderNumber(): string
+    {
+        // 8 chars upper alpha-num, avoiding 0, O, I, 1, L
+        $chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+        $code = '';
+        $max = strlen($chars) - 1;
+
+        do {
+            $code = '';
+            for ($i = 0; $i < 8; $i++) {
+                $code .= $chars[random_int(0, $max)];
+            }
+        } while (Invoice::where('order_no', $code)->exists());
+
+        return $code;
     }
 }

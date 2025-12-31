@@ -36,6 +36,7 @@ class InvoiceFactory extends Factory
             'tax' => $tax,
             'total_amount' => $subTotal + $tax,
             'status' => InvoiceStatus::Pending,
+            'order_no' => strtoupper(fake()->unique()->bothify('??#??#??')), // Simple randomization for factory
         ];
     }
 
