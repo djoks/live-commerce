@@ -18,6 +18,7 @@
                 autocomplete="current-password"
                 :placeholder="__('Password')"
                 viewable
+                class="bg-white dark:bg-zinc-900 text-zinc-500 py-3"
             />
 
             <flux:button variant="primary" type="submit" class="w-full" data-test="confirm-password-button">

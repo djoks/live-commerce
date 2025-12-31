@@ -18,6 +18,7 @@
                 type="email"
                 required
                 autocomplete="email"
+                class="bg-white dark:bg-zinc-900 text-zinc-500 py-3"
             />
 
             <!-- Password -->
@@ -29,6 +30,7 @@
                 autocomplete="new-password"
                 :placeholder="__('Password')"
                 viewable
+                class="bg-white dark:bg-zinc-900 text-zinc-500 py-3"
             />
 
             <!-- Confirm Password -->
@@ -40,6 +42,7 @@
                 autocomplete="new-password"
                 :placeholder="__('Confirm password')"
                 viewable
+                class="bg-white dark:bg-zinc-900 text-zinc-500 py-3"
             />
 
             <div class="flex items-center justify-end">

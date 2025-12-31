@@ -1,6 +1,6 @@
-<div class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-    <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
+<div class="flex items-center justify-center">
+    <img src="{{ Vite::asset('resources/images/logo.png') }}" class="h-12 w-auto" alt="Furniro Logo">
 </div>
-<div class="ms-1 grid flex-1 text-start text-sm">
-    <span class="mb-0.5 truncate leading-tight font-semibold">Laravel Starter Kit</span>
+<div class="ms-3 grid flex-1 text-start text-sm">
+    <span class="mb-0.5 truncate leading-tight font-bold text-2xl font-montserrat text-zinc-900 dark:text-white">Furniro</span>
 </div>

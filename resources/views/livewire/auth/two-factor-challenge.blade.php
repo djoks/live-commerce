@@ -63,6 +63,7 @@
                                 x-bind:required="showRecoveryInput"
                                 autocomplete="one-time-code"
                                 x-model="recovery_code"
+                                class="bg-white dark:bg-zinc-900 text-zinc-500 py-3"
                             />
                         </div>
 

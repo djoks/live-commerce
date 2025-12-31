@@ -16,6 +16,7 @@
                 required
                 autofocus
                 placeholder="email@example.com"
+                class="bg-white dark:bg-zinc-900 text-zinc-500 py-3"
             />
 
             <flux:button variant="primary" type="submit" class="w-full" data-test="email-password-reset-link-button">

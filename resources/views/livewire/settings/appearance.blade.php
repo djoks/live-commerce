@@ -1,12 +1,14 @@
 <?php
 
+use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new #[Layout('components.layouts.storefront')] class extends Component {
     //
 }; ?>
 
-<section class="w-full">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section class="w-full">
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Appearance')" :subheading="__('Update the appearance settings for your account')">
@@ -16,4 +18,5 @@ new class extends Component {
             <flux:radio value="system" icon="computer-desktop">{{ __('System') }}</flux:radio>
         </flux:radio.group>
     </x-settings.layout>
-</section>
+    </section>
+</div>

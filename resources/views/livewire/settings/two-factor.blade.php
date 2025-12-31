@@ -5,12 +5,13 @@ use Laravel\Fortify\Actions\DisableTwoFactorAuthentication;
 use Laravel\Fortify\Actions\EnableTwoFactorAuthentication;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Volt\Component;
 use Symfony\Component\HttpFoundation\Response;
 
-new class extends Component {
+new #[Layout('components.layouts.storefront')] class extends Component {
     #[Locked]
     public bool $twoFactorEnabled;
 
@@ -177,7 +178,8 @@ new class extends Component {
     }
 } ?>
 
-<section class="w-full">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <section class="w-full">
     @include('partials.settings-heading')
 
     <x-settings.layout
@@ -381,4 +383,5 @@ new class extends Component {
             @endif
         </div>
     </flux:modal>
-</section>
+    </section>
+</div>
