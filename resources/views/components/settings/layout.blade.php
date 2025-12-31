@@ -7,6 +7,30 @@
                 <flux:navlist.item :href="route('two-factor.show')" wire:navigate>{{ __('Two-Factor Auth') }}</flux:navlist.item>
             @endif
             <flux:navlist.item :href="route('appearance.edit')" wire:navigate>{{ __('Appearance') }}</flux:navlist.item>
+
+            <flux:modal.trigger name="logout-modal">
+                <flux:navlist.item as="button" class="w-full text-start">{{ __('Log Out') }}</flux:navlist.item>
+            </flux:modal.trigger>
+
+            <flux:modal name="logout-modal" class="min-w-[400px]">
+                <div class="space-y-6">
+                    <div>
+                        <flux:heading size="lg">{{ __('Log Out?') }}</flux:heading>
+                        <flux:subheading>{{ __('Are you sure you want to log out of your account?') }}</flux:subheading>
+                    </div>
+
+                    <div class="flex justify-end gap-2">
+                        <flux:modal.close>
+                            <flux:button variant="filled">{{ __('Cancel') }}</flux:button>
+                        </flux:modal.close>
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <flux:button type="submit" variant="danger">{{ __('Log Out') }}</flux:button>
+                        </form>
+                    </div>
+                </div>
+            </flux:modal>
         </flux:navlist>
     </div>
 

@@ -22,7 +22,7 @@ new class extends Component {
     public function addToCart(CartService $cartService)
     {
         if (!Auth::check()) {
-            return $this->redirect(route('login'));
+            return redirect()->guest(route('login'));
         }
 
         $cartService->addItem(Auth::user(), $this->product->id);
