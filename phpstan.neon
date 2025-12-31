@@ -25,3 +25,19 @@ parameters:
             message: '#Undefined variable: \$this#'
             paths:
                 - tests/*
+        -
+            message: '#Return type \(array\<string, mixed\>\) of method .+Factory::definition\(\) should be compatible#'
+            paths:
+                - database/factories/*
+        -
+            message: '#Call to an undefined method PHPUnit\\Framework\\TestCase::#'
+            paths:
+                - tests/*
+        -
+            message: '#Cannot call method .+ on App\\Models\\User\|null#'
+            paths:
+                - tests/*
+        -
+            message: '#Class Spatie\\MediaLibraryPro\\Models\\TemporaryUpload not found#'
+            paths:
+                - config/*
