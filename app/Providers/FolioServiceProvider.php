@@ -5,6 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Folio\Folio;
 
+/**
+ * Laravel Folio service provider.
+ *
+ * Configures file-based routing for the application's pages.
+ */
 class FolioServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +22,8 @@ class FolioServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
+     *
+     * Sets up the pages directory for file-based routing.
      */
     public function boot(): void
     {

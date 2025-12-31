@@ -4,10 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -19,14 +15,13 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('user-password.edit');
     Volt::route('settings/appearance', 'settings.appearance')->name('appearance.edit');
 
-    Volt::route('settings/two-factor', 'settings.two-factor')
-        ->middleware(
-            when(
-                Features::canManageTwoFactorAuthentication()
-                    && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword'),
-                ['password.confirm'],
-                [],
-            ),
-        )
-        ->name('two-factor.show');
+    $twoFactorRoute = Volt::route('settings/two-factor', 'settings.two-factor');
+
+    // Conditionally apply password confirmation middleware if 2FA is enabled and requires confirmation
+    if (Features::canManageTwoFactorAuthentication()
+        && Features::optionEnabled(Features::twoFactorAuthentication(), 'confirmPassword')) {
+        $twoFactorRoute->middleware(['password.confirm']);
+    }
+
+    $twoFactorRoute->name('two-factor.show');
 });

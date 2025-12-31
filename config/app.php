@@ -15,6 +15,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'currency_symbol' => env('APP_CURRENCY_SYMBOL', '€'),
+
+    'low_stock_threshold' => (int) env('LOW_STOCK_THRESHOLD', 10),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

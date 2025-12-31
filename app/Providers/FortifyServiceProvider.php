@@ -11,6 +11,11 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 
+/**
+ * Laravel Fortify service provider.
+ *
+ * Configures authentication actions, views, and rate limiting for the app.
+ */
 class FortifyServiceProvider extends ServiceProvider
 {
     /**

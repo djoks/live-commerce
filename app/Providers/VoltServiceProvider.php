@@ -5,6 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Volt\Volt;
 
+/**
+ * Livewire Volt service provider.
+ *
+ * Configures Volt component mounting paths for single-file Livewire components.
+ */
 class VoltServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +22,8 @@ class VoltServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
+     *
+     * Mounts Volt components from the livewire views and pages directories.
      */
     public function boot(): void
     {
