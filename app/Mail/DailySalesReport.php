@@ -25,7 +25,7 @@ class DailySalesReport extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  Collection<int, object>  $productsSold  Collection of product sales data
+     * @param  Collection<int, \stdClass>  $productsSold  Collection of product sales data
      * @param  int  $totalOrders  Number of orders for the day
      * @param  float  $totalRevenue  Total revenue for the day
      * @param  int  $totalItemsSold  Total quantity of items sold

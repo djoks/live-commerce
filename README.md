@@ -4,13 +4,13 @@ A modern e-commerce shopping cart system built with Laravel 12, Livewire 3, and 
 
 ## Features
 
-- **Product Catalog** — Browse products with category filtering, sorting options, and SEO-friendly slugs
-- **Shopping Cart** — Database-backed cart with real-time updates, quantity management, and automatic expiration
-- **Wishlist** — Save products for later; expired cart items automatically move to wishlist
-- **Checkout** — Complete order processing with billing details, stock validation, and invoice generation
-- **Low Stock Alerts** — Automated email notifications when product stock falls below threshold
-- **Daily Sales Reports** — Scheduled evening reports summarizing daily sales activity
-- **Authentication** — Full user authentication with two-factor authentication support
+- **Product Catalog**: Browse products with category filtering, sorting options, and SEO-friendly slugs
+- **Shopping Cart**:  Database-backed cart with real-time updates, quantity management, and automatic expiration
+- **Wishlist**: Save products for later; expired cart items automatically move to wishlist
+- **Checkout**: Complete order processing with billing details, stock validation, and invoice generation
+- **Low Stock Alerts**: Automated email notifications when product stock falls below threshold
+- **Daily Sales Reports**: Scheduled evening reports summarizing daily sales activity
+- **Authentication**: Full user authentication with two-factor authentication support
 
 ## Tech Stack
 

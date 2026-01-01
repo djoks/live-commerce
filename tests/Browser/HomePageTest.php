@@ -43,7 +43,8 @@ describe('Home Page', function () {
     it('displays footer with copyright', function () {
         $page = visit('/');
 
-        $page->assertSee(date('Y'))
+        $page->assertSee('Funiro')
+            ->assertSee('All rights reserved')
             ->assertNoJavaScriptErrors();
     });
 });

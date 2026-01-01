@@ -121,7 +121,12 @@ describe('ReportingService', function () {
 
         expect($report['products'])->toHaveCount(1);
 
+        /** @var object|null $widget */
         $widget = $report['products']->first();
+
+        expect($widget)->not->toBeNull();
+        /** @var object{product_name: string, unit_price: float, total_quantity: int, total_revenue: float} $widget */
+
         expect($widget->product_name)->toBe('Widget')
             ->and($widget->total_quantity)->toBe(5)
             ->and($widget->total_revenue)->toBe(125.0);
@@ -144,6 +149,7 @@ describe('DailySalesReport Mailable', function () {
     });
 
     it('contains sales data in content', function () {
+        /** @var \Illuminate\Support\Collection<int, \stdClass> $products */
         $products = collect([
             (object) [
                 'product_name' => 'Test Product',

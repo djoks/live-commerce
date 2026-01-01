@@ -11,7 +11,7 @@ use App\Models\User;
 
 describe('Checkout Page', function () {
     it('redirects to shop when cart is empty', function () {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
 
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
@@ -24,7 +24,7 @@ describe('Checkout Page', function () {
     });
 
     it('displays checkout page with cart items', function () {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
         $product = Product::factory()->create([
             'name' => 'Test Chair',
             'price' => 250.00,
@@ -46,7 +46,8 @@ describe('Checkout Page', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->assertSee('Checkout')
@@ -57,7 +58,7 @@ describe('Checkout Page', function () {
     });
 
     it('displays billing form fields', function () {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
         $product = Product::factory()->create();
 
         $cart = Cart::factory()->create([
@@ -75,7 +76,8 @@ describe('Checkout Page', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->assertSee('Name')
@@ -89,7 +91,7 @@ describe('Checkout Page', function () {
     });
 
     it('displays payment method options', function () {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
         $product = Product::factory()->create();
 
         $cart = Cart::factory()->create([
@@ -107,7 +109,8 @@ describe('Checkout Page', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->assertSee('Direct Bank Transfer')
@@ -117,7 +120,7 @@ describe('Checkout Page', function () {
     });
 
     it('displays order summary with totals', function () {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
         $product = Product::factory()->create([
             'price' => 100.00,
         ]);
@@ -137,7 +140,8 @@ describe('Checkout Page', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->assertSee('Subtotal')
@@ -147,7 +151,7 @@ describe('Checkout Page', function () {
     });
 
     it('prefills user name and email', function () {
-        $user = User::factory()->create([
+        $user = User::factory()->withoutTwoFactor()->create([
             'name' => 'John Doe',
             'email' => 'john@example.com',
         ]);
@@ -168,7 +172,8 @@ describe('Checkout Page', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->assertValue('input[wire\\:model\\.blur="name"]', 'John Doe')
@@ -177,7 +182,7 @@ describe('Checkout Page', function () {
     });
 
     it('displays features banner on checkout page', function () {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
         $product = Product::factory()->create();
 
         $cart = Cart::factory()->create([
@@ -195,7 +200,8 @@ describe('Checkout Page', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->assertSee('High Quality')
@@ -208,7 +214,7 @@ describe('Checkout Page', function () {
 
 describe('Checkout Flow', function () {
     it('completes checkout successfully', function () {
-        $user = User::factory()->create([
+        $user = User::factory()->withoutTwoFactor()->create([
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
         ]);
@@ -232,7 +238,8 @@ describe('Checkout Flow', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->assertSee('Billing details');
@@ -249,7 +256,7 @@ describe('Checkout Flow', function () {
     });
 
     it('shows validation errors for empty required fields', function () {
-        $user = User::factory()->create();
+        $user = User::factory()->withoutTwoFactor()->create();
         $product = Product::factory()->create();
 
         $cart = Cart::factory()->create([
@@ -267,7 +274,8 @@ describe('Checkout Flow', function () {
         $page = visit('/login');
         $page->type('input[name=email]', $user->email)
             ->type('input[name=password]', 'password')
-            ->click('Log in');
+            ->click('Log in')
+            ->assertPathIsNot('/login');
 
         $page->navigate('/checkout')
             ->clear('input[wire\\:model\\.blur="name"]')

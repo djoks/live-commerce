@@ -97,7 +97,10 @@ describe('ProductObserver Low Stock Detection', function () {
 
         $product->update(['stock_quantity' => 8]);
 
-        expect($product->fresh()->low_stock_notified_at)->not->toBeNull();
+        /** @var Product $product */
+    $product = $product->fresh();
+
+    expect($product->low_stock_notified_at)->not->toBeNull();
     });
 
     it('does not dispatch job when already notified', function () {
@@ -153,7 +156,10 @@ describe('ProductObserver Low Stock Detection', function () {
         // Restock above threshold
         $product->update(['stock_quantity' => 20]);
 
-        expect($product->fresh()->low_stock_notified_at)->toBeNull();
+        /** @var Product $product */
+    $product = $product->fresh();
+
+    expect($product->low_stock_notified_at)->toBeNull();
     });
 
     it('can notify again after stock is replenished and drops again', function () {
@@ -171,7 +177,10 @@ describe('ProductObserver Low Stock Detection', function () {
         $product->update(['stock_quantity' => 8]);
 
         Queue::assertPushed(SendLowStockNotification::class);
-        expect($product->fresh()->low_stock_notified_at)->not->toBeNull();
+        /** @var Product $product */
+    $product = $product->fresh();
+
+    expect($product->low_stock_notified_at)->not->toBeNull();
     });
 
     it('does not dispatch when non-stock fields are updated', function () {

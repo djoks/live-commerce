@@ -34,6 +34,7 @@ class CheckoutService
      * reduces product stock, and marks the cart as sold.
      *
      * @param  User  $user  The authenticated user performing checkout.
+     * @param  array<string, mixed>  $billingData
      * @return Invoice The created invoice.
      *
      * @throws InvalidArgumentException If the cart is empty or stock is insufficient.
@@ -53,7 +54,7 @@ class CheckoutService
                 $product = $this->productRepository->findForUpdate($item->product_id);
 
                 if (! $product || $product->stock_quantity < $item->quantity) {
-                    $available = $product?->stock_quantity ?? 0;
+                    $available = $product->stock_quantity ?? 0;
                     throw new InvalidArgumentException(
                         "Insufficient stock for {$item->product->name}. Available: {$available}"
                     );

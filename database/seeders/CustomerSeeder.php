@@ -24,10 +24,12 @@ class CustomerSeeder extends Seeder
 
         // For 5 of them, create 1-3 invoices
         $customers->take(5)->each(function ($customer) {
+            /** @var User $user */
+            $user = $customer->user;
             \App\Models\Invoice::factory(rand(1, 3))->create([
                 'user_id' => $customer->user_id,
-                'customer_name' => $customer->user->name,
-                'customer_email' => $customer->user->email,
+                'customer_name' => $user->name,
+                'customer_email' => $user->email,
             ]);
         });
     }

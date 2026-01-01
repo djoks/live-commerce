@@ -33,7 +33,7 @@ class ReportingService
      *     total_orders: int,
      *     total_items_sold: int,
      *     total_revenue: float,
-     *     products: Collection<int, object>
+     *     products: Collection<int, \stdClass>
      * }
      */
     public function getDailySalesReport(?CarbonInterface $date = null): array
@@ -67,6 +67,7 @@ class ReportingService
         }
 
         // Sort by revenue descending
+        /** @var Collection<int, \stdClass> $sortedProducts */
         $sortedProducts = collect(array_values($products))
             ->sortByDesc('total_revenue')
             ->values();

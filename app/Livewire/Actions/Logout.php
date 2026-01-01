@@ -18,7 +18,7 @@ class Logout
      *
      * Invalidates the session and regenerates the CSRF token for security.
      */
-    public function __invoke()
+    public function __invoke(): \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
         Auth::guard('web')->logout();
 

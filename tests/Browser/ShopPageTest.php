@@ -19,7 +19,10 @@ describe('Shop Page', function () {
 
         $page = visit('/shop');
 
-        $page->assertSee($products->first()->name)
+        /** @var Product $product */
+        $product = $products->first();
+
+        $page->assertSee($product->name)
             ->assertNoJavaScriptErrors();
     });
 
@@ -91,11 +94,13 @@ describe('Product Detail Page', function () {
     });
 
     it('displays quantity selector', function () {
-        $product = Product::factory()->create();
+        $product = Product::factory()->create(['stock_quantity' => 10]);
 
         $page = visit("/shop/{$product->slug}");
 
-        $page->assertVisible('button')
+        $page->assertSee('Add To Cart')
+            ->assertSee('−')
+            ->assertSee('+')
             ->assertNoJavaScriptErrors();
     });
 
