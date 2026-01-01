@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories\Contracts;
 
 use App\Models\Invoice;
+use Carbon\CarbonInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -31,6 +32,13 @@ interface InvoiceContract
     public function findTodaysInvoices(): Collection;
 
     /**
+     * Get all invoices for a specific date.
+     *
+     * @return Collection<int, Invoice>
+     */
+    public function findByDate(CarbonInterface $date): Collection;
+
+    /**
      * Get paginated invoices for a specific user.
      *
      * @return LengthAwarePaginator<int, Invoice>
@@ -43,4 +51,9 @@ interface InvoiceContract
      * @return Collection<int, Invoice>
      */
     public function getAllByUserId(int $userId): Collection;
+
+    /**
+     * Check if an order number already exists.
+     */
+    public function orderNumberExists(string $orderNo): bool;
 }

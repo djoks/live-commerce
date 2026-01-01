@@ -103,6 +103,16 @@ class ProductRepository implements ProductContract
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function findForUpdate(int $id): ?Product
+    {
+        return Product::query()
+            ->lockForUpdate()
+            ->find($id);
+    }
+
+    /**
      * Apply sorting to a product query.
      *
      * @param  Builder<Product>  $query

@@ -6,10 +6,8 @@ namespace App\Services;
 
 use App\Enums\InvoiceStatus;
 use App\Models\Invoice;
-use App\Models\Product;
 use App\Models\User;
 use App\Repositories\Contracts\CartContract;
-use App\Repositories\Contracts\CustomerContract;
 use App\Repositories\Contracts\InvoiceContract;
 use App\Repositories\Contracts\ProductContract;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +23,6 @@ class CheckoutService
     public function __construct(
         private CartService $cartService,
         private CartContract $cartRepository,
-        private CustomerContract $customerRepository,
         private InvoiceContract $invoiceRepository,
         private ProductContract $productRepository
     ) {}
@@ -53,14 +50,10 @@ class CheckoutService
         return DB::transaction(function () use ($user, $cart, $billingData) {
             // Validate stock and lock products
             foreach ($cart->items as $item) {
+                $product = $this->productRepository->findForUpdate($item->product_id);
 
-                /** @var Product $product */
-                $product = Product::query()
-                    ->lockForUpdate()
-                    ->find($item->product_id);
-
-                if ($product->stock_quantity < $item->quantity) {
-                    $available = $product->stock_quantity;
+                if (! $product || $product->stock_quantity < $item->quantity) {
+                    $available = $product?->stock_quantity ?? 0;
                     throw new InvalidArgumentException(
                         "Insufficient stock for {$item->product->name}. Available: {$available}"
                     );
@@ -106,10 +99,9 @@ class CheckoutService
             // Create invoice
             $invoice = $this->invoiceRepository->create($invoiceData, $items);
 
-            // Reduce stock
+            // Reduce stock (observer handles low stock notifications)
             foreach ($cart->items as $item) {
                 $this->productRepository->reduceStock($item->product, $item->quantity);
-                $this->checkLowStock($item->product->fresh());
             }
 
             // Mark cart as sold
@@ -120,34 +112,11 @@ class CheckoutService
     }
 
     /**
-     * Check if a product's stock is low and dispatch alerts if necessary.
-     *
-     * @param  Product|null  $product  The product to check.
-     */
-    private function checkLowStock(?Product $product): void
-    {
-        if (! $product) {
-            return;
-        }
-
-        $threshold = (int) config('cart.low_stock_threshold', 5);
-
-        if ($product->stock_quantity <= $threshold && $product->stock_quantity > 0) {
-            // Dispatch low stock notification job (to be implemented)
-            // SendLowStockAlertJob::dispatch($product);
-        }
-    }
-    /**
      * Generate a unique order number.
-     * Use simple static implementation or move to a helper/trait if needed.
-     *
-     * @return string
      */
     private function generateOrderNumber(): string
     {
-        // 8 chars upper alpha-num, avoiding 0, O, I, 1, L
         $chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-        $code = '';
         $max = strlen($chars) - 1;
 
         do {
@@ -155,7 +124,7 @@ class CheckoutService
             for ($i = 0; $i < 8; $i++) {
                 $code .= $chars[random_int(0, $max)];
             }
-        } while (Invoice::where('order_no', $code)->exists());
+        } while ($this->invoiceRepository->orderNumberExists($code));
 
         return $code;
     }

@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Invoice;
 use App\Repositories\Contracts\InvoiceContract;
+use Carbon\CarbonInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -49,6 +50,17 @@ class InvoiceRepository implements InvoiceContract
     /**
      * {@inheritDoc}
      */
+    public function findByDate(CarbonInterface $date): Collection
+    {
+        return Invoice::query()
+            ->whereDate('created_at', $date)
+            ->with('items')
+            ->get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getByUserId(int $userId, int $perPage = 15): LengthAwarePaginator
     {
         return Invoice::query()
@@ -68,5 +80,15 @@ class InvoiceRepository implements InvoiceContract
             ->with('items')
             ->latest()
             ->get();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function orderNumberExists(string $orderNo): bool
+    {
+        return Invoice::query()
+            ->where('order_no', $orderNo)
+            ->exists();
     }
 }

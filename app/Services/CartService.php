@@ -19,8 +19,7 @@ use Illuminate\Support\Facades\DB;
 class CartService
 {
     public function __construct(
-        private CartContract $cartRepository,
-        private WishlistService $wishlistService
+        private CartContract $cartRepository
     ) {}
 
     /**
@@ -64,27 +63,11 @@ class CartService
     {
         $cart = $this->getOrCreateActiveCart($user);
 
-        $cartItem = CartItem::query()
-            ->where('cart_id', $cart->id)
-            ->where('product_id', $productId)
-            ->first();
-
-        if ($cartItem) {
-            $cartItem->increment('quantity', $quantity);
-        } else {
-            $cartItem = CartItem::create([
-                'cart_id' => $cart->id,
-                'product_id' => $productId,
-                'quantity' => $quantity
-            ]);
-        }
+        $cartItem = $this->cartRepository->addItem($cart->id, $productId, $quantity);
 
         $this->refreshExpiration($cart);
 
-        /** @var CartItem $freshItem */
-        $freshItem = $cartItem->fresh(['product']);
-
-        return $freshItem;
+        return $cartItem->load('product');
     }
 
     /**
@@ -101,25 +84,22 @@ class CartService
     {
         $cart = $this->getOrCreateActiveCart($user);
 
-        $cartItem = CartItem::query()
-            ->where('cart_id', $cart->id)
-            ->where('product_id', $productId)
-            ->first();
+        $cartItem = $this->cartRepository->findItem($cart->id, $productId);
 
         if (! $cartItem) {
             return null;
         }
 
         if ($quantity <= 0) {
-            $cartItem->delete();
+            $this->cartRepository->removeItem($cart->id, $productId);
 
             return null;
         }
 
-        $cartItem->update(['quantity' => $quantity]);
+        $updatedItem = $this->cartRepository->updateItemQuantity($cartItem, $quantity);
         $this->refreshExpiration($cart);
 
-        return $cartItem->fresh(['product']);
+        return $updatedItem;
     }
 
     /**
@@ -132,10 +112,7 @@ class CartService
     {
         $cart = $this->getOrCreateActiveCart($user);
 
-        CartItem::query()
-            ->where('cart_id', $cart->id)
-            ->where('product_id', $productId)
-            ->delete();
+        $this->cartRepository->removeItem($cart->id, $productId);
 
         $this->refreshExpiration($cart);
     }
@@ -167,8 +144,14 @@ class CartService
             $user = $cart->user;
 
             if ($user) {
+                $wishlist = $this->cartRepository->findByUserId($user->id, CartType::Wishlist);
+
+                if (! $wishlist) {
+                    $wishlist = $this->cartRepository->create($user->id, CartType::Wishlist);
+                }
+
                 foreach ($cart->items as $item) {
-                    $this->wishlistService->addItem($user, $item->product_id);
+                    $this->cartRepository->findOrCreateItem($wishlist->id, $item->product_id);
                 }
             }
 

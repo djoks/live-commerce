@@ -60,4 +60,11 @@ interface ProductContract
      * Reduce a product's stock quantity.
      */
     public function reduceStock(Product $product, int $quantity): void;
+
+    /**
+     * Find a product by ID with a pessimistic lock for updates.
+     *
+     * Used during checkout to prevent race conditions on stock updates.
+     */
+    public function findForUpdate(int $id): ?Product;
 }

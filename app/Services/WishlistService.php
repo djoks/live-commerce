@@ -19,7 +19,8 @@ use App\Repositories\Contracts\CartContract;
 class WishlistService
 {
     public function __construct(
-        private CartContract $cartRepository
+        private CartContract $cartRepository,
+        private CartService $cartService
     ) {}
 
     /**
@@ -45,10 +46,7 @@ class WishlistService
     {
         $wishlist = $this->getOrCreateDefaultWishlist($user);
 
-        return CartItem::query()->firstOrCreate(
-            ['cart_id' => $wishlist->id, 'product_id' => $productId],
-            ['quantity' => 1]
-        );
+        return $this->cartRepository->findOrCreateItem($wishlist->id, $productId);
     }
 
     /**
@@ -58,10 +56,7 @@ class WishlistService
     {
         $wishlist = $this->getOrCreateDefaultWishlist($user);
 
-        CartItem::query()
-            ->where('cart_id', $wishlist->id)
-            ->where('product_id', $productId)
-            ->delete();
+        $this->cartRepository->removeItem($wishlist->id, $productId);
     }
 
     /**
@@ -69,9 +64,9 @@ class WishlistService
      *
      * Removes from wishlist and adds to cart in one operation.
      */
-    public function moveToCart(User $user, int $productId, CartService $cartService): void
+    public function moveToCart(User $user, int $productId): void
     {
         $this->removeItem($user, $productId);
-        $cartService->addItem($user, $productId, 1);
+        $this->cartService->addItem($user, $productId, 1);
     }
 }
