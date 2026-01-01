@@ -29,38 +29,41 @@
                     class="font-medium text-zinc-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-400 transition-colors {{ request()->routeIs('home') ? 'text-amber-500 dark:text-amber-400' : '' }}"
                     wire:navigate
                 >
-                    Home
+                    {{ __('Home') }}
                 </a>
                 <a 
                     href="{{ route('shop.index') }}" 
                     class="font-medium text-zinc-600 dark:text-zinc-300 hover:text-amber-500 dark:hover:text-amber-400 transition-colors {{ request()->routeIs('shop.index') ? 'text-amber-500 dark:text-amber-400' : '' }}"
                     wire:navigate
                 >
-                    Shop
+                    {{ __('Shop') }}
                 </a>
                 <a 
                     href="#" 
                     class="font-medium text-zinc-400 dark:text-zinc-500 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
                 >
-                    About
+                    {{ __('About') }}
                 </a>
                 <a 
                     href="#" 
                     class="font-medium text-zinc-400 dark:text-zinc-500 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
                 >
-                    Contact
+                    {{ __('Contact') }}
                 </a>
                 <a 
                     href="{{ route('profile.edit') }}" 
                     class="font-medium text-zinc-600 dark:text-zinc-300 hover:text-amber-500 dark:hover:text-amber-400 transition-colors {{ request()->routeIs('profile.edit') ? 'text-amber-500 dark:text-amber-400' : '' }}"
                     wire:navigate
                 >
-                    Account
+                    {{ __('Account') }}
                 </a>
             </div>
 
             {{-- Actions --}}
             <div class="flex items-center space-x-4">
+                {{-- Language Switch --}}
+                <livewire:language-switch />
+
                 {{-- Cart Icon --}}
                 <livewire:cart-icon />
 
@@ -140,6 +143,8 @@
                     <span class="sr-only">Close menu</span>
                     <flux:icon name="x-mark" class="h-6 w-6" />
                 </button>
+                    <flux:icon name="x-mark" class="h-6 w-6" />
+                </button>
             </div>
 
             {{-- Drawer Content --}}
@@ -151,7 +156,7 @@
                         wire:navigate
                         @click="mobileMenuOpen = false"
                     >
-                        Home
+                        {{ __('Home') }}
                     </a>
                     <a 
                         href="{{ route('shop.index') }}" 
@@ -159,21 +164,21 @@
                         wire:navigate
                         @click="mobileMenuOpen = false"
                     >
-                        Shop
+                        {{ __('Shop') }}
                     </a>
                     <a 
                         href="#" 
                         class="text-lg font-medium text-zinc-400 dark:text-zinc-500 hover:text-amber-500 dark:hover:text-amber-400"
                         @click="mobileMenuOpen = false"
                     >
-                        About
+                        {{ __('About') }}
                     </a>
                     <a 
                         href="#" 
                         class="text-lg font-medium text-zinc-400 dark:text-zinc-500 hover:text-amber-500 dark:hover:text-amber-400"
                         @click="mobileMenuOpen = false"
                     >
-                        Contact
+                        {{ __('Contact') }}
                     </a>
                     <a 
                         href="{{ route('profile.edit') }}" 
@@ -181,7 +186,7 @@
                         wire:navigate
                         @click="mobileMenuOpen = false"
                     >
-                        Account
+                        {{ __('Account') }}
                     </a>
 </nav>
             </div>

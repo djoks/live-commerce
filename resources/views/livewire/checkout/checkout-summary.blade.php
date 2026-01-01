@@ -68,28 +68,28 @@ new class extends Component {
     @endif
 
     <div class="grid grid-cols-2 gap-4 mb-4 pt-4">
-        <div class="text-gray-900 dark:text-white">Subtotal</div>
+        <div class="text-gray-900 dark:text-white">{{ __('Subtotal') }}</div>
         <div class="text-right text-gray-900 dark:text-white">
             {{ config('app.currency_symbol') }} {{ number_format($this->subtotal, 0, '.', ',') }}
         </div>
     </div>
 
     <div class="grid grid-cols-2 gap-4 mb-4">
-        <div class="text-gray-900 dark:text-white">Discount</div>
+        <div class="text-gray-900 dark:text-white">{{ __('Discount') }}</div>
         <div class="text-right text-gray-900 dark:text-white">
             {{ config('app.currency_symbol') }} 0
         </div>
     </div>
 
     <div class="grid grid-cols-2 gap-4 mb-4">
-        <div class="text-gray-900 dark:text-white">Tax</div>
+        <div class="text-gray-900 dark:text-white">{{ __('Tax') }}</div>
         <div class="text-right text-gray-900 dark:text-white">
             {{ config('app.currency_symbol') }} 0
         </div>
     </div>
 
     <div class="grid grid-cols-2 gap-4 mb-8 pt-4 border-b border-gray-200 dark:border-zinc-700 pb-8">
-        <div class="text-gray-900 dark:text-white">Total</div>
+        <div class="text-gray-900 dark:text-white">{{ __('Total') }}</div>
         <div class="text-right text-2xl font-bold text-[#B88E2F]">
             {{ config('app.currency_symbol') }} {{ number_format($this->subtotal, 0, '.', ',') }}
         </div>
@@ -101,11 +101,11 @@ new class extends Component {
             <div class="flex items-center mb-2">
                 <input id="direct-bank-transfer" type="radio" value="bank" wire:model.live="paymentMethod" class="h-4 w-4 text-black border-gray-300 focus:ring-black">
                 <label for="direct-bank-transfer" class="ml-3 block text-base font-medium text-gray-900 dark:text-white">
-                    Direct Bank Transfer
+                    {{ __('Direct Bank Transfer') }}
                 </label>
             </div>
             <p class="ml-7 text-sm text-gray-500 dark:text-zinc-400 font-light text-justify" x-show="$wire.paymentMethod === 'bank'">
-                Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                {{ __('Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.') }}
             </p>
         </div>
 
@@ -113,11 +113,11 @@ new class extends Component {
             <div class="flex items-center">
                 <input id="card" type="radio" value="card" wire:model.live="paymentMethod" class="h-4 w-4 text-black border-gray-300 focus:ring-black">
                 <label for="card" class="ml-3 block text-base font-medium text-gray-900 dark:text-white">
-                    Card
+                    {{ __('Card') }}
                 </label>
             </div>
             <p class="ml-7 text-sm text-gray-500 dark:text-zinc-400 font-light text-justify mt-2" x-show="$wire.paymentMethod === 'card'" x-cloak>
-                Pay securely with your credit or debit card.
+                {{ __('Pay securely with your credit or debit card.') }}
             </p>
         </div>
 
@@ -125,24 +125,24 @@ new class extends Component {
             <div class="flex items-center">
                 <input id="cash-on-delivery" type="radio" value="cash_on_delivery" wire:model.live="paymentMethod" class="h-4 w-4 text-black border-gray-300 focus:ring-black">
                 <label for="cash-on-delivery" class="ml-3 block text-base font-medium text-gray-900 dark:text-white">
-                    Cash On Delivery
+                    {{ __('Cash On Delivery') }}
                 </label>
             </div>
             <p class="ml-7 text-sm text-gray-500 dark:text-zinc-400 font-light text-justify mt-2" x-show="$wire.paymentMethod === 'cash_on_delivery'" x-cloak>
-                Pay with cash upon delivery.
+                {{ __('Pay with cash upon delivery.') }}
             </p>
         </div>
     </div>
 
     <div class="mb-8">
         <p class="text-sm text-gray-900 dark:text-white text-justify">
-            Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <span class="font-bold">privacy policy.</span>
+            {{ __('Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our') }} <span class="font-bold">{{ __('privacy policy.') }}</span>
         </p>
     </div>
 
     <div class="flex justify-end">
         <x-primary-button wire:click="placeOrder">
-            Place order
+            {{ __('Place order') }}
         </x-primary-button>
     </div>
 </div>

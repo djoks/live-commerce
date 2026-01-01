@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Actions;
 
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -19,7 +18,7 @@ class Logout
      *
      * Invalidates the session and regenerates the CSRF token for security.
      */
-    public function __invoke(): RedirectResponse
+    public function __invoke()
     {
         Auth::guard('web')->logout();
 

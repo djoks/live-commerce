@@ -28,7 +28,7 @@
                 type="email"
                 required
                 autocomplete="email"
-                placeholder="email@example.com"
+                placeholder="{{ __('email@example.com') }}"
                 class="bg-white dark:bg-zinc-900 text-zinc-500 py-3"
             />
 

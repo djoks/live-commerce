@@ -117,7 +117,7 @@ new class extends Component {
                         <button 
                             wire:click="decrement"
                             class="px-4 py-3 text-xl text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
-                            :disabled="$quantity <= 1"
+                            @disabled($quantity <= 1)
                         >
                             −
                         </button>
@@ -127,7 +127,7 @@ new class extends Component {
                         <button 
                             wire:click="increment"
                             class="px-4 py-3 text-xl text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
-                            :disabled="$quantity >= $product->stock_quantity"
+                            @disabled($quantity >= $product->stock_quantity)
                         >
                             +
                         </button>
@@ -138,7 +138,7 @@ new class extends Component {
                         wire:click="addToCart"
                         class="px-10 py-3 border-2 border-zinc-900 dark:border-white text-zinc-900 dark:text-white font-medium rounded-lg hover:bg-zinc-900 dark:hover:bg-white hover:text-white dark:hover:text-zinc-900 transition-colors cursor-pointer"
                     >
-                        Add To Cart
+                        {{ __('Add To Cart') }}
                     </button>
                 </div>
 
@@ -149,24 +149,24 @@ new class extends Component {
                 <div class="space-y-3 text-sm text-[#9F9F9F] dark:text-zinc-400">
                     {{-- Category --}}
                     <div class="flex items-center gap-4">
-                        <span class="w-20">Category</span>
+                        <span class="w-20">{{ __('Category') }}</span>
                         <span>:</span>
-                        <span class="text-zinc-700 dark:text-zinc-300">{{ $product->category?->name ?? 'Uncategorized' }}</span>
+                        <span class="text-zinc-700 dark:text-zinc-300">{{ $product->category?->name ?? __('Uncategorized') }}</span>
                     </div>
 
                     {{-- Share --}}
                     <div class="flex items-center gap-4">
-                        <span class="w-20">Share</span>
+                        <span class="w-20">{{ __('Share') }}</span>
                         <span>:</span>
                         <div class="flex items-center gap-4">
                             <a href="https://facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" class="text-zinc-700 dark:text-zinc-300 hover:text-[#B88E2F] transition-colors">
-                                <img src="{{ Vite::asset('resources/images/icons/facebook.svg') }}" alt="Facebook" class="w-5 h-5">
+                                <img src="{{ Vite::asset('resources/images/icons/facebook.svg') }}" alt="Facebook" class="w-5 h-5 dark:invert">
                             </a>
                             <a href="https://linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}" target="_blank" class="text-zinc-700 dark:text-zinc-300 hover:text-[#B88E2F] transition-colors">
-                                <img src="{{ Vite::asset('resources/images/icons/linkedin.svg') }}" alt="LinkedIn" class="w-5 h-5">
+                                <img src="{{ Vite::asset('resources/images/icons/linkedin.svg') }}" alt="LinkedIn" class="w-5 h-5 dark:invert">
                             </a>
                             <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}" target="_blank" class="text-zinc-700 dark:text-zinc-300 hover:text-[#B88E2F] transition-colors">
-                                <img src="{{ Vite::asset('resources/images/icons/x.svg') }}" alt="X" class="w-5 h-5">
+                                <img src="{{ Vite::asset('resources/images/icons/x.svg') }}" alt="X" class="w-5 h-5 dark:invert">
                             </a>
                         </div>
                     </div>

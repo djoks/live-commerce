@@ -90,11 +90,11 @@ new class extends Component {
 ?>
 
 <div>
-    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Billing details</h2>
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">{{ __('Billing details') }}</h2>
     
     @if ($errors->any())
         <div class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-            <p class="text-red-600 dark:text-red-400 font-medium mb-2">Please fix the following errors:</p>
+            <p class="text-red-600 dark:text-red-400 font-medium mb-2">{{ __('Please fix the following errors:') }}</p>
             <ul class="list-disc list-inside text-red-500 dark:text-red-400 text-sm space-y-1">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -105,16 +105,16 @@ new class extends Component {
     
     <div class="space-y-6">
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">Name</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('Name') }}</label>
             <input type="text" wire:model.blur="name" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
             @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">Country / Region</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('Country / Region') }}</label>
             <div class="relative">
                 <select wire:model.blur="countryRegion" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 appearance-none focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
-                    <option value="">Select a country</option>
+                    <option value="">{{ __('Select a country') }}</option>
                     @foreach($this->countries as $code => $name)
                         <option value="{{ $name }}">{{ $name }}</option>
                     @endforeach
@@ -127,19 +127,19 @@ new class extends Component {
         </div>
 
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">Street address</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('Street address') }}</label>
             <input type="text" wire:model.blur="streetAddress" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
             @error('streetAddress') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">Town / City</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('Town / City') }}</label>
             <input type="text" wire:model.blur="city" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
             @error('city') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">Province</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('Province') }}</label>
             <div class="relative">
                 <select wire:model.blur="province" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 appearance-none focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
                     <option>Western Province</option>
@@ -151,25 +151,25 @@ new class extends Component {
         </div>
 
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">ZIP code</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('ZIP code') }}</label>
             <input type="text" wire:model.blur="zipCode" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
             @error('zipCode') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">Phone</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('Phone') }}</label>
             <input type="tel" wire:model.blur="phone" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
             @error('phone') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="space-y-2">
-            <label class="block text-base font-medium text-gray-900 dark:text-white">Email address</label>
+            <label class="block text-base font-medium text-gray-900 dark:text-white">{{ __('Email address') }}</label>
             <input type="email" wire:model.blur="email" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white">
             @error('email') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div class="space-y-2">
-            <input type="text" wire:model.blur="additionalInfo" placeholder="Additional information" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white mt-8">
+            <input type="text" wire:model.blur="additionalInfo" placeholder="{{ __('Additional information') }}" class="w-full rounded-[10px] border border-[#9F9F9F] dark:border-zinc-700 py-4 px-4 focus:ring-[#B88E2F] focus:border-[#B88E2F] dark:bg-zinc-800 dark:text-white mt-8">
         </div>
     </div>
 </div>

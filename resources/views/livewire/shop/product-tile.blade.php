@@ -46,7 +46,7 @@ new class extends Component {
                 wire:click="addToCart" 
                 class="!bg-white !text-[#B88E2F] !border border-[#B88E2F] hover:!bg-[#B88E2F] hover:!text-white px-10 py-3 font-semibold transition-colors duration-300 cursor-pointer"
             >
-                Add to cart
+                {{ __('Add to Cart') }}
             </flux:button>
         </div>
     </div>
@@ -64,7 +64,7 @@ new class extends Component {
                 {{ config('app.currency_symbol') }} {{ number_format($product->price, 0, '.', '.') }}
             </span>
             <span class="text-sm {{ $product->stock_quantity <= config('app.low_stock_threshold') ? 'text-red-500' : 'text-[#898989] dark:text-zinc-400' }}">
-                {{ $product->stock_quantity }} in stock
+                {{ $product->stock_quantity }} {{ __('in stock') }}
             </span>
         </div>
     </a>

@@ -18,7 +18,7 @@ new class extends Component {
 ?>
 
 <nav class="flex items-center justify-center gap-2 font-medium text-base">
-    <a href="{{ route('home') }}" class="text-zinc-900 font-medium hover:text-[#B88E2F] transition-colors">Home</a>
+    <a href="{{ route('home') }}" class="text-zinc-900 font-medium hover:text-[#B88E2F] transition-colors">{{ __('Home') }}</a>
     
     @foreach($links as $label => $url)
         <span class="text-zinc-900">></span>

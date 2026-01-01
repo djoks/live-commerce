@@ -108,7 +108,7 @@ new class extends Component {
                         {{-- Header --}}
                         <div class="flex items-start justify-between px-4 py-6 sm:px-6 border-b border-zinc-200 dark:border-zinc-700">
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white" id="slide-over-title">Cart</h2>
+                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white" id="slide-over-title">{{ __('Cart') }}</h2>
                                 @if($cart && $cart->items->isNotEmpty() && $cart->expires_at)
                                     <x-cart.expiration-timer :expiresAt="$cart->expires_at->toIso8601String()" />
                                 @endif
@@ -116,7 +116,7 @@ new class extends Component {
                             <div class="ml-3 flex h-7 items-center">
                                 <button type="button" class="relative -m-2 p-2 text-gray-400 hover:text-gray-500" @click="open = false">
                                     <span class="absolute -inset-0.5"></span>
-                                    <span class="sr-only">Close panel</span>
+                                    <span class="sr-only">{{ __('Close panel') }}</span>
                                     <flux:icon name="x-mark" class="h-6 w-6" />
                                 </button>
                             </div>
@@ -127,7 +127,7 @@ new class extends Component {
                             @if(!$cart || $cart->items->isEmpty())
                                 <div class="flex flex-col items-center justify-center h-full text-center space-y-4">
                                     <flux:icon name="shopping-bag" class="h-16 w-16 text-zinc-300" />
-                                    <p class="text-lg text-zinc-500">Your cart is empty.</p>
+                                    <p class="text-lg text-zinc-500">{{ __('Your cart is empty.') }}</p>
                                 </div>
                             @else
                                 <ul role="list" class="-my-6 divide-y divide-gray-200 dark:divide-zinc-700">
@@ -179,20 +179,20 @@ new class extends Component {
                         @if($cart && $cart->items->isNotEmpty())
                             <div class="border-t border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
                                 <div class="flex justify-between text-base font-medium text-gray-900 dark:text-white px-4 py-6 sm:px-6">
-                                    <p>Subtotal</p>
+                                    <p>{{ __('Subtotal') }}</p>
                                     <p class="text-amber-600">{{ config('app.currency_symbol') }} {{ number_format($this->subtotal, 0, '.', '.') }}</p>
                                 </div>
                                 <div class="flex gap-4 border-t border-zinc-200 dark:border-zinc-700 px-4 py-6 sm:px-6">
                                     <button 
                                         type="button" 
                                         wire:click="clearCart"
-                                        wire:confirm="Are you sure you want to clear your cart?"
+                                        wire:confirm="{{ __('Are you sure you want to clear your cart?') }}"
                                         class="flex-1 flex items-center justify-center rounded-lg border border-black dark:border-white px-6 py-3 text-base font-medium text-black dark:text-white hover:bg-red-50 hover:text-red-600 hover:border-red-600 dark:hover:bg-red-900/20 dark:hover:text-red-400 dark:hover:border-red-400 transition-colors"
                                     >
-                                        Clear
+                                        {{ __('Clear') }}
                                     </button>
                                     <x-primary-button href="{{ route('checkout') }}" class="flex-1 py-3 px-6">
-                                        Checkout
+                                        {{ __('Checkout') }}
                                     </x-primary-button>
                                 </div>
                             </div>
