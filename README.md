@@ -441,6 +441,12 @@ php artisan storage:link
 php artisan optimize:clear
 ```
 
+## Screenshots
+
+![Homepage](screenshots/Home-01-01-2026_02_53_AM-min.png) | ![Shop](screenshots/Shop-01-01-2026_02_52_AM-min.png) |
+
+![Homepage Dark Mode](screenshots/Home-01-01-2026_02_54_AM-min.png)
+
 ## Contributing
 
 1. Fork the repository
