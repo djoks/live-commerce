@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Run Pint on changed PHP files
+vendor/bin/pint --dirty
+
+# Run tests
+php artisan test

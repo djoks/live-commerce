@@ -30,6 +30,7 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^4.2",
+        "pestphp/pest-plugin-browser": "^4.1",
         "pestphp/pest-plugin-laravel": "^4.0"
     },
     "autoload": {
@@ -50,6 +51,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
             "@php artisan migrate --force",
+            "@php artisan storage:link",
             "npm install",
             "npm run build"
         ],
