@@ -19,7 +19,7 @@ new class extends Component {
 <div class="relative w-full h-[316px]">
     {{-- Background Image --}}
     <img 
-        src="{{ Vite::asset('resources/images/shop-header.png') }}" 
+        src="{{ asset('build/images/shop-header.png') }}" 
         alt="{{ $title }} Banner" 
         class="w-full h-full object-cover"
     >

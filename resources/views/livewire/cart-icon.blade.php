@@ -33,7 +33,7 @@ new class extends Component {
     @click="$dispatch('toggle-cart-drawer')"
 >
     <img 
-        src="{{ Vite::asset('resources/images/icons/cart.svg') }}" 
+        src="{{ asset('build/images/icons/cart.svg') }}" 
         alt="Cart" 
         class="h-6 w-6 dark:invert"
     >

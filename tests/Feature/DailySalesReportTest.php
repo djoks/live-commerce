@@ -126,7 +126,6 @@ describe('ReportingService', function () {
 
         expect($widget)->not->toBeNull();
         /** @var object{product_name: string, unit_price: float, total_quantity: int, total_revenue: float} $widget */
-
         expect($widget->product_name)->toBe('Widget')
             ->and($widget->total_quantity)->toBe(5)
             ->and($widget->total_revenue)->toBe(125.0);

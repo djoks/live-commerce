@@ -10,7 +10,7 @@ name('checkout.success');
         <div class="text-center max-w-lg">
             {{-- Illustration --}}
             <div class="mb-8 flex justify-center">
-                <img src="{{ Vite::asset('resources/images/checkout-complete.png') }}" alt="Order Successful" class="max-w-[220px] md:max-w-[250px]">
+                <img src="{{ asset('build/images/checkout-complete.png') }}" alt="Order Successful" class="max-w-[220px] md:max-w-[250px]">
             </div>
 
             {{-- Success Message --}}

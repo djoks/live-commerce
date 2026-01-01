@@ -11,7 +11,7 @@ name('home');
     <div class="relative w-full h-[600px] lg:h-[720px] bg-zinc-100 dark:bg-zinc-800">
         {{-- Background Image --}}
         <img 
-            src="{{ Vite::asset('resources/images/cover.png') }}" 
+            src="{{ asset('build/images/cover.png') }}" 
             alt="New Arrival" 
             class="w-full h-full object-cover object-bottom"
         >
@@ -56,7 +56,7 @@ name('home');
 
         <div class="w-full overflow-hidden">
             <img 
-                src="{{ Vite::asset('resources/images/furniture-grid.png') }}" 
+                src="{{ asset('build/images/furniture-grid.png') }}" 
                 alt="Furniture Grid Inspiration" 
                 class="w-full h-auto object-cover"
             >

@@ -13,7 +13,7 @@
             {{-- Brand (Desktop Only) --}}
             <a href="{{ route('home') }}" class="hidden md:flex items-center gap-2" wire:navigate>
                 <img 
-                    src="{{ Vite::asset('resources/images/logo.png') }}" 
+                    src="{{ asset('build/images/logo.png') }}" 
                     alt="Furniro Logo" 
                     class="h-8 w-auto"
                 >
@@ -78,7 +78,7 @@
                     <img 
                         x-show="$flux.dark"
                         x-cloak
-                        src="{{ Vite::asset('resources/images/icons/sun.svg') }}" 
+                        src="{{ asset('build/images/icons/sun.svg') }}" 
                         alt="Light mode" 
                         class="h-5 w-5 invert"
                     >
@@ -86,7 +86,7 @@
                     <img 
                         x-show="! $flux.dark"
                         x-cloak
-                        src="{{ Vite::asset('resources/images/icons/moon.svg') }}" 
+                        src="{{ asset('build/images/icons/moon.svg') }}" 
                         alt="Dark mode" 
                         class="h-5 w-5"
                     >
@@ -128,7 +128,7 @@
             <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-zinc-100 dark:border-zinc-800">
                 <a href="{{ route('home') }}" class="flex items-center gap-2" wire:navigate @click="mobileMenuOpen = false">
                     <img 
-                        src="{{ Vite::asset('resources/images/logo.png') }}" 
+                        src="{{ asset('build/images/logo.png') }}" 
                         alt="Furniro Logo" 
                         class="h-8 w-auto"
                     >

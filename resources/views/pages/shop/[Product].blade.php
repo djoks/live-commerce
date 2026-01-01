@@ -160,13 +160,13 @@ new class extends Component {
                         <span>:</span>
                         <div class="flex items-center gap-4">
                             <a href="https://facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" class="text-zinc-700 dark:text-zinc-300 hover:text-[#B88E2F] transition-colors">
-                                <img src="{{ Vite::asset('resources/images/icons/facebook.svg') }}" alt="Facebook" class="w-5 h-5 dark:invert">
+                                <img src="{{ asset('build/images/icons/facebook.svg') }}" alt="Facebook" class="w-5 h-5 dark:invert">
                             </a>
                             <a href="https://linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}" target="_blank" class="text-zinc-700 dark:text-zinc-300 hover:text-[#B88E2F] transition-colors">
-                                <img src="{{ Vite::asset('resources/images/icons/linkedin.svg') }}" alt="LinkedIn" class="w-5 h-5 dark:invert">
+                                <img src="{{ asset('build/images/icons/linkedin.svg') }}" alt="LinkedIn" class="w-5 h-5 dark:invert">
                             </a>
                             <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}" target="_blank" class="text-zinc-700 dark:text-zinc-300 hover:text-[#B88E2F] transition-colors">
-                                <img src="{{ Vite::asset('resources/images/icons/x.svg') }}" alt="X" class="w-5 h-5 dark:invert">
+                                <img src="{{ asset('build/images/icons/x.svg') }}" alt="X" class="w-5 h-5 dark:invert">
                             </a>
                         </div>
                     </div>

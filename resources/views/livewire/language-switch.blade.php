@@ -31,7 +31,7 @@ new class extends Component {
 >
     {{-- Language Icon --}}
     <img 
-        src="{{ Vite::asset('resources/images/icons/lang.svg') }}" 
+        src="{{ asset('build/images/icons/lang.svg') }}" 
         alt="Language" 
         class="h-6 w-6 dark:invert"
     >
