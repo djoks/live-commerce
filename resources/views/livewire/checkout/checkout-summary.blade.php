@@ -11,6 +11,10 @@ new class extends Component {
     public $cart;
     public $paymentMethod = '';
 
+    /**
+     * Initialize the summary with cart data and customer's default payment method.
+     * Redirects to shop if cart is empty.
+     */
     public function mount(CartService $cartService)
     {
         if (Auth::check()) {
@@ -33,6 +37,9 @@ new class extends Component {
         }
     }
 
+    /**
+     * Refresh cart from database when cart-updated event is dispatched.
+     */
     #[On('cart-updated')]
     public function refreshCart(CartService $cartService)
     {
@@ -41,11 +48,19 @@ new class extends Component {
         }
     }
 
+    /**
+     * Get the cart subtotal (sum of price * quantity for all items).
+     *
+     * @return float|int
+     */
     public function getSubtotalProperty()
     {
         return $this->cart ? $this->cart->items->sum(fn($item) => $item->product->price * $item->quantity) : 0;
     }
 
+    /**
+     * Dispatch order submission event to checkout-form component.
+     */
     public function placeOrder()
     {
         $this->dispatch('trigger-order-submission', paymentMethod: $this->paymentMethod)->to('checkout.checkout-form');

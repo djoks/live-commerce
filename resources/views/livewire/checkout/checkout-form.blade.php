@@ -20,6 +20,10 @@ new class extends Component {
     public $email = '';
     public $additionalInfo = '';
 
+    /**
+     * Initialize the form with the authenticated user's data.
+     * Pre-fills from customer profile if available.
+     */
     public function mount() {
         if(Auth::check()) {
             $user = Auth::user();
@@ -38,11 +42,23 @@ new class extends Component {
         }
     }
 
+    /**
+     * Get the list of countries for the dropdown.
+     *
+     * @return array<string, string>
+     */
     public function getCountriesProperty(): array
     {
         return Countries::getList('en');
     }
 
+    /**
+     * Handle order submission triggered from the summary component.
+     *
+     * @param  string  $paymentMethod  The selected payment method.
+     *
+     * @throws \InvalidArgumentException If cart is empty or stock is insufficient.
+     */
     #[On('trigger-order-submission')]
     public function submitOrder($paymentMethod, \App\Services\CheckoutService $checkoutService)
     {

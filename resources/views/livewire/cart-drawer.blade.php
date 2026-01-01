@@ -9,6 +9,9 @@ use Livewire\Attributes\On;
 new class extends Component {
     public ?Cart $cart = null;
 
+    /**
+     * Initialize the cart drawer with the user's active cart.
+     */
     public function mount(CartService $cartService): void
     {
         if (Auth::check()) {
@@ -16,6 +19,9 @@ new class extends Component {
         }
     }
 
+    /**
+     * Refresh the cart from the database when a cart update event is triggered.
+     */
     #[On('cart-updated')]
     public function refreshCart(CartService $cartService): void
     {
@@ -24,6 +30,12 @@ new class extends Component {
         }
     }
 
+    /**
+     * Update the quantity of an item in the cart.
+     *
+     * @param  int  $productId  The product ID to update.
+     * @param  int  $quantity  The new quantity.
+     */
     public function updateQuantity(int $productId, int $quantity, CartService $cartService): void
     {
         if (!Auth::check()) return;
@@ -38,6 +50,11 @@ new class extends Component {
         $this->dispatch('cart-updated');
     }
 
+    /**
+     * Remove an item from the cart.
+     *
+     * @param  int  $productId  The product ID to remove.
+     */
     public function removeItem(int $productId, CartService $cartService): void
     {
         if (!Auth::check()) return;
@@ -47,6 +64,9 @@ new class extends Component {
         $this->dispatch('cart-updated');
     }
 
+    /**
+     * Clear all items from the cart.
+     */
     public function clearCart(CartService $cartService): void
     {
         if (!Auth::check()) return;
@@ -56,6 +76,11 @@ new class extends Component {
         $this->dispatch('cart-updated');
     }
 
+    /**
+     * Get the cart subtotal.
+     *
+     * @return float The sum of all item prices multiplied by quantities.
+     */
     public function getSubtotalProperty(): float
     {
         if (!$this->cart || !$this->cart->items) {

@@ -8,11 +8,18 @@ use Livewire\Attributes\On;
 new class extends Component {
     public $count = 0;
 
+    /**
+     * Initialize the cart icon with the current item count.
+     */
     public function mount(CartService $cartService)
     {
         $this->updateCartCount($cartService);
     }
 
+    /**
+     * Update the cart item count from the database.
+     * Called on mount and when cart-updated event is dispatched.
+     */
     #[On('cart-updated')] 
     public function updateCartCount(CartService $cartService) 
     {

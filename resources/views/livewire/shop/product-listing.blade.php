@@ -22,6 +22,12 @@ new class extends Component {
     #[Url]
     public string $sortBy = 'default';
 
+    /**
+     * Handle filter changes from the filter bar component.
+     *
+     * @param  int  $perPage  Items per page.
+     * @param  string  $sortBy  Sort option.
+     */
     #[On('filterChanged')]
     public function handleFilterChanged(int $perPage, string $sortBy): void
     {

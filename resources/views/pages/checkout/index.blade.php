@@ -28,41 +28,41 @@ name('checkout');
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="flex items-center gap-4">
-                    <div class="text-zinc-900 dark:text-white">
-                        <flux:icon name="trophy" class="w-12 h-12" />
+                    <div>
+                        <img src="{{ asset('build/images/icons/high-quality.svg') }}" alt="High Quality" class="w-12 h-12 dark:invert">
                     </div>
                     <div>
-                        <h3 class="text-[25px] font-semibold text-[#242424] dark:text-white leading-tight">{{ __('High Quality') }}</h3>
+                        <h3 class="text-xl font-semibold text-[#242424] dark:text-white leading-tight">{{ __('High Quality') }}</h3>
                         <p class="text-[#898989] dark:text-zinc-400 font-medium">{{ __('crafted from top materials') }}</p>
                     </div>
                 </div>
                 
                 <div class="flex items-center gap-4">
-                    <div class="text-zinc-900 dark:text-white">
-                        <flux:icon name="check-badge" class="w-12 h-12" />
+                    <div>
+                        <img src="{{ asset('build/images/icons/warranty-protection.svg') }}" alt="Warranty Protection" class="w-12 h-12 dark:invert">
                     </div>
                     <div>
-                        <h3 class="text-[25px] font-semibold text-[#242424] dark:text-white leading-tight">{{ __('Warranty Protection') }}</h3>
+                        <h3 class="text-xl font-semibold text-[#242424] dark:text-white leading-tight">{{ __('Warranty Protection') }}</h3>
                         <p class="text-[#898989] dark:text-zinc-400 font-medium">{{ __('Over 2 years') }}</p>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <div class="text-zinc-900 dark:text-white">
-                        <flux:icon name="truck" class="w-12 h-12" />
+                    <div>
+                        <img src="{{ asset('build/images/icons/free-shipping.svg') }}" alt="Free Shipping" class="w-12 h-12 dark:invert">
                     </div>
                     <div>
-                        <h3 class="text-[25px] font-semibold text-[#242424] dark:text-white leading-tight">{{ __('Free Shipping') }}</h3>
+                        <h3 class="text-xl font-semibold text-[#242424] dark:text-white leading-tight">{{ __('Free Shipping') }}</h3>
                         <p class="text-[#898989] dark:text-zinc-400 font-medium">{{ __('Order over 150 $') }}</p>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <div class="text-zinc-900 dark:text-white">
-                        <flux:icon name="users" class="w-12 h-12" />
+                    <div>
+                        <img src="{{ asset('build/images/icons/customer-support.svg') }}" alt="24/7 Support" class="w-12 h-12 dark:invert">
                     </div>
                     <div>
-                        <h3 class="text-[25px] font-semibold text-[#242424] dark:text-white leading-tight">{{ __('24 / 7 Support') }}</h3>
+                        <h3 class="text-xl font-semibold text-[#242424] dark:text-white leading-tight">{{ __('24 / 7 Support') }}</h3>
                         <p class="text-[#898989] dark:text-zinc-400 font-medium">{{ __('Dedicated support') }}</p>
                     </div>
                 </div>

@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Session;
 new class extends Component {
     public string $currentLocale = 'en';
 
+    /**
+     * Initialize the component with the current application locale.
+     */
     public function mount(): void
     {
         $this->currentLocale = App::getLocale();
     }
 
+    /**
+     * Toggle between English and Polish locales.
+     * Persists the preference to session and refreshes the page.
+     */
     public function toggleLocale(): void
     {
         $newLocale = $this->currentLocale === 'en' ? 'pl' : 'en';

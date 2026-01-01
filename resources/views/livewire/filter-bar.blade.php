@@ -19,16 +19,31 @@ new class extends Component {
 
     public array $perPageOptions = [16, 32, 48];
 
+    /**
+     * Handle perPage value change and dispatch filter event.
+     *
+     * @param  int  $value  The new items per page value.
+     */
     public function updatedPerPage(int $value): void
     {
         $this->dispatch('filterChanged', perPage: $value, sortBy: $this->sortBy);
     }
 
+    /**
+     * Handle sortBy value change and dispatch filter event.
+     *
+     * @param  string  $value  The new sort option value.
+     */
     public function updatedSortBy(string $value): void
     {
         $this->dispatch('filterChanged', perPage: $this->perPage, sortBy: $value);
     }
 
+    /**
+     * Get available sort options from the enum.
+     *
+     * @return array<string, string>
+     */
     public function getSortOptionsProperty(): array
     {
         return ProductSortOption::options();
