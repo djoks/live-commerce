@@ -16,7 +16,7 @@ A modern e-commerce shopping cart system built with Laravel 12, Livewire 3, and 
 
 | Category | Technology |
 |----------|------------|
-| Backend | PHP 8.4, Laravel 12 |
+| Backend | PHP 8.2+, Laravel 12 |
 | Frontend | Livewire 3, Volt, Flux UI |
 | Styling | Tailwind CSS 4 |
 | Routing | Laravel Folio (file-based) |
@@ -70,6 +70,9 @@ docker run --rm \
 
 # Run database migrations and seeders
 ./vendor/bin/sail artisan migrate --seed
+
+# Create storage symlink
+./vendor/bin/sail artisan storage:link
 
 # Install frontend dependencies and build assets
 ./vendor/bin/sail npm install
@@ -325,9 +328,8 @@ php artisan test --parallel
 Browser tests require Playwright and built frontend assets:
 
 ```bash
-# Install Playwright (first time only)
-npm install playwright
-npx playwright install chromium
+# Install Playwright browsers (first time only)
+npx playwright install chromium --with-deps
 
 # Build assets before running browser tests
 npm run build
