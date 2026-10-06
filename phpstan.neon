@@ -6,12 +6,22 @@ parameters:
 
     paths:
         - app/
+        - config/
+        - database/
+        - routes/
+        - tests/
 
-    # Level 10 is the highest level
-    level: 5
+    # Level 8 is the highest level
+    level: 8
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
+    # Check model properties
+    checkModelProperties: true
+    
+    # Check Octane compatibility
+    checkOctaneCompatibility: true
+
+    ignoreErrors:
+        -
+            message: '#Undefined variable: \$this#'
+            paths:
+                - tests/*

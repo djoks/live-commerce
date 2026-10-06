@@ -2,66 +2,56 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title) ? $title.' - '.config('app.name') : config('app.name') }}</title>
 
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @fluxStyles
 </head>
-<body class="min-h-screen font-sans antialiased bg-base-200">
+<body class="min-h-screen bg-white dark:bg-zinc-800">
 
-    {{-- NAVBAR mobile only --}}
-    <x-nav sticky class="lg:hidden">
-        <x-slot:brand>
-            <x-app-brand />
-        </x-slot:brand>
-        <x-slot:actions>
-            <label for="main-drawer" class="lg:hidden me-3">
-                <x-icon name="o-bars-3" class="cursor-pointer" />
-            </label>
-        </x-slot:actions>
-    </x-nav>
+    <flux:sidebar sticky stashable class="background-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
+        <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-    {{-- MAIN --}}
-    <x-main>
-        {{-- SIDEBAR --}}
-        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
+        <flux:brand href="#" logo="https://fluxui.dev/img/demo/logo.png" name="{{ config('app.name') }}" class="px-2" />
 
-            {{-- BRAND --}}
-            <x-app-brand class="px-5 pt-4" />
+        <flux:navlist variant="outline">
+            <flux:navlist.item icon="home" href="/" :current="request()->is('/')">Hello</flux:navlist.item>
+            
+            <flux:navlist.group expandable heading="Settings" class="mt-4">
+                <flux:navlist.item icon="wifi" href="#">Wifi</flux:navlist.item>
+                <flux:navlist.item icon="archive-box" href="#">Archives</flux:navlist.item>
+            </flux:navlist.group>
+        </flux:navlist>
 
-            {{-- MENU --}}
-            <x-menu activate-by-route>
+        <flux:spacer />
 
-                {{-- User --}}
-                @if($user = auth()->user())
-                    <x-menu-separator />
+        @if($user = auth()->user())
+            <flux:dropdown position="bottom" align="start">
+                <flux:profile avatar="https://i.pravatar.cc/150?u={{ $user->email }}" name="{{ $user->name }}" />
 
-                    <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="-mx-2 !-my-2 rounded">
-                        <x-slot:actions>
-                            <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
-                        </x-slot:actions>
-                    </x-list-item>
+                <flux:menu>
+                    <flux:menu.item icon="arrow-right-start-on-rectangle" href="/logout">Logout</flux:menu.item>
+                </flux:menu>
+            </flux:dropdown>
+        @endif
+    </flux:sidebar>
 
-                    <x-menu-separator />
-                @endif
+    <flux:header class="lg:hidden">
+        <flux:sidebar.toggle class="lg:hidden" icon="bars-3" />
+        <flux:spacer />
+    </flux:header>
 
-                <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-                
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
-            </x-menu>
-        </x-slot:sidebar>
+    <flux:main>
+        {{ $slot }}
+    </flux:main>
 
-        {{-- The `$slot` goes here --}}
-        <x-slot:content>
-            {{ $slot }}
-        </x-slot:content>
-    </x-main>
+    <flux:toast />
 
-    {{--  TOAST area --}}
-    <x-toast />
+    @fluxScripts
 </body>
 </html>
